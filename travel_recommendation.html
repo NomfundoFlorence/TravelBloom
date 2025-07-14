@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TravelBloom</title>
+    <!-- <link rel="stylesheet" href="travel_recommendation.css" /> -->
+    
+    <style>
+        :root {
+            --nav-height: 5rem;
+        }
+
+        body {
+        margin: 0;
+        color: #fff;
+        }
+
+        nav {
+        position: fixed;
+        background-color: #48cea2;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 98vw;
+        padding: 0 1rem;
+        height: var(--nav-height);
+        }
+
+        #website-name {
+        color: #fff;
+        font-style: italic;
+        }
+
+        ul {
+        display: flex;
+        }
+        ul li {
+        list-style: none;
+        margin: 1rem;
+        }
+
+        a {
+        text-decoration: none;
+        font-size: 1.3rem;
+        color: #fff;
+        }
+
+        a:hover {
+        color: #000;
+        }
+
+        #search-form {
+        background-color: #fff;
+        padding: 0.5rem 2rem;
+        border-radius: 2rem;
+        }
+
+        #search-form input:focus {
+        outline: none;
+        }
+
+        input {
+        border: none;
+        }
+
+        button {
+        background-color: #48cea2;
+        padding: 0.3rem 0.5rem;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        }
+
+        #search-btn,
+        #clear-btn {
+        margin-left: 1rem;
+        }
+
+        #background-img {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-image: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+        background-size: cover;
+        background-position: center;
+        z-index: -1;
+        filter: blur(1.5px);
+        }
+
+        #slogan-desc-container {
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh - var(--nav-height));
+        justify-content: center;
+        padding-left: 1.5rem;
+        }
+
+        #company-name {
+        font-weight: 700;
+        font-style: italic;
+        }
+
+        #slogan {
+        display: flex;
+        flex-direction: column;
+        font-size: 5rem;
+        margin-bottom: 1rem;
+        }
+
+        #description {
+        width: 50%;
+        font-size: 1.5rem;
+        }
+
+        #home {
+        padding-top: 3rem;
+        }
+
+        #book-now {
+        background-color: #3aaa85;
+        width: 16rem;
+        height: 5rem;
+        color: #fff;
+        font-size: 1rem;
+        font-weight: bold;
+        font-style: italic;
+        }
+
+        #about-us,
+        #contact-us {
+        font-size: 1.4rem;
+        padding-top: var(--nav-height);
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        }
+
+        #team {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        }
+
+        .card {
+        background-color: #ffffffcc;
+        border-radius: 0.5rem;
+        padding: 0.3rem 0.5rem;
+        color: #101010;
+        }
+
+        .card .member-name {
+        margin: 0.5rem 0;
+        }
+
+        .job-title {
+        color: #48cea2;
+        font-style: italic;
+        }
+
+        .job-description {
+        font-size: 1rem;
+        }
+
+        #contact-form {
+        display: flex;
+        flex-direction: column;
+        margin-left: auto;
+        margin-right: 3rem;
+        max-width: 50%;
+        background-color: #1010105c;
+        border-radius: 1rem;
+        padding: 1rem;
+        }
+
+        #name,
+        #email {
+        margin-bottom: 1rem;
+        height: 2rem;
+        border-radius: 0.5rem;
+        }
+
+        textarea {
+        border-radius: 1rem;
+        margin-bottom: 1rem;
+        resize: none;
+        }
+
+        #send-email-btn {
+        height: 2rem;
+        color: #fff;
+        font-weight: bold;
+        }
+
+        #results-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        padding: calc(var(--nav-height) + 1rem) 1.5rem 1.5rem 1.5rem; /* Top padding pushed to 6rem */
+        max-width: 100vw;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        }
+
+        .destination-div {
+        background-color: #ffffffcc;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        color: #000;
+        box-sizing: border-box;
+        overflow: hidden;
+        }
+
+        .destination-img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 0.5rem;
+        }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <h1 id="website-name">TravelBloom</h1>
+      <form id="search-form">
+        <input
+          type="text"
+          id="search-input"
+          name="search-input"
+          placeholder="Enter text to search" />
+        <button type="submit" id="search-btn">Search</button
+        ><button id="clear-btn">Clear</button>
+      </form>
+      <ul>
+        <li><a href="#home" id="nav-home">Home</a></li>
+        <li><a href="#about-us" id="nav-about">About Us</a></li>
+        <li><a href="#contact-us" id="nav-contact">Contact Us</a></li>
+      </ul>
+    </nav>
+    <div id="background-img"></div>
+    <div id="home">
+      <section id="slogan-desc-container">
+        <h2 id="slogan">
+          Locate <span>your next</span> <span>destination</span>
+        </h2>
+        <p id="description">
+          <span id="company-name">TravelBloom</span> - your ultimate guide to
+          discovering breathtaking destinations around the world. Explore
+          personalized recommendations, hidden gems, and travel tips tailored
+          just for you. Whether you're dreaming of mountains, beaches, or
+          vibrant cities. We help turn those dreams into unforgettable journeys.
+        </p>
+        <button id="book-now">Book Now</button>
+      </section>
+    </div>
+    <div id="about-us">
+      <h1 id="about">About Us</h1>
+      <p>
+        TravelBloom is a vibrant travel website that helps you discover exciting
+        destinations around the world. From scenic getaways to cultural
+        hotspots, we offer personalized recommendations to match your travel
+        dreams. Our user-friendly platform makes it easy to plan your next
+        adventure with expert tips, stunning visuals, and curated guides.
+        Whether you're a seasoned explorer or a first-time traveler, TravelBloom
+        is your trusted companion on the journey. Start exploring today and turn
+        every trip into a lasting memory.
+      </p>
+      <h2 id="the-team-heading">The team</h2>
+      <div id="team">
+        <div class="card">
+          <h4 class="member-name">
+            Amanda Smith - <span class="job-title">Operations manager</span>
+          </h4>
+          <p class="job-description">
+            Oversees the day-to-day functioning of travel services, ensuring
+            trips run smoothly from planning to execution. They coordinate
+            teams, manage logistics, and handle any operational issues to
+            deliver seamless travel experiences.
+          </p>
+        </div>
+        <div class="card">
+          <h4 class="member-name">
+            John Doe - <span class="job-title">Transport coordinator</span>
+          </h4>
+          <p class="job-description">
+            Responsible for organizing and managing all travel-related
+            transportation, including transfers, flights, and vehicle schedules.
+            They ensure that all travel arrangements are timely, safe, and
+            aligned with customer itineraries.
+          </p>
+        </div>
+        <div class="card">
+          <h4 class="member-name">
+            Shirley Adams - <span class="job-title">Travel consultant</span>
+          </h4>
+          <p class="job-description">
+            Helps clients plan and book their trips, offering expert advice on
+            destinations, accommodations, and activities. They tailor travel
+            experiences to client preferences while handling bookings,
+            documentation, and travel insurance.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div id="contact-us">
+      <h1 id="contact">Contact Us</h1>
+      <form id="contact-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" />
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" />
+        <label for="message">Message:</label>
+        <textarea name="message" id="message" cols="30" rows="10"></textarea>
+        <button type="submit" id="send-email-btn">Send email</button>
+      </form>
+    </div>
+    <div id="results-container"></div>
+
+    <script src="travel_recommendation.js"></script>
+  </body>
+</html>
